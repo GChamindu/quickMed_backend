@@ -2,10 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Contracts\Permission;
-use Spatie\Permission\Contracts\Role;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
+
 
 class RolePermissionSeeder extends Seeder
 {
@@ -40,5 +43,26 @@ class RolePermissionSeeder extends Seeder
             'view prescriptions',
             'user activities',
         ]);
+
+
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin',
+                'password' => bcrypt('12345678'),
+            ]
+        );
+        $admin->assignRole($adminRole);
+
+
+
+        $user = User::firstOrCreate(
+            ['email' => 'user@example.com'],
+            [
+                'name' => 'Normal User',
+                'password' => bcrypt('12345678'),
+            ]
+        );
+        $user->assignRole($userRole);
     }
 }
