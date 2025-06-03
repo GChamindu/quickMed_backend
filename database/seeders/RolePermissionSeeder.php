@@ -52,9 +52,9 @@ class RolePermissionSeeder extends Seeder
                 'password' => bcrypt('12345678'),
             ]
         );
+
+
         $admin->assignRole($adminRole);
-
-
 
         $user = User::firstOrCreate(
             ['email' => 'user@example.com'],
